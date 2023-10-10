@@ -28,6 +28,11 @@ public class WalkRightState : State<PlayerState>
         #region CHANGE STATE
         if (!_playerStateManager._playerController._playerInput.RightButton.isPressed)
             _playerStateManager.ChangeState(PlayerState.Idle);
+        if (_playerController.data.CanJump && _playerController.data.Grounded)
+        {
+            _playerController.moveDirection = _playerController.PlayerRigidBody2D.velocity;
+            _playerStateManager.ChangeState(PlayerState.Jump);
+        }
         #endregion
 
     }
@@ -42,7 +47,7 @@ public class WalkRightState : State<PlayerState>
     public override void OnExit()
     {
         base.OnExit();
-        _playerController.PlayerRigidBody2D.velocity = Vector2.zero;
+        
     }
 
 

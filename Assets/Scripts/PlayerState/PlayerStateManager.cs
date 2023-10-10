@@ -18,6 +18,9 @@ public class PlayerStateManager : StatesMachine<PlayerState>
         AllStates.Add(PlayerState.Idle, new IdleState(PlayerState.Idle, this));
         AllStates.Add(PlayerState.WalkLeft, new WalkLeftState(PlayerState.WalkLeft, this));
         AllStates.Add(PlayerState.WalkRight, new WalkRightState(PlayerState.WalkRight, this));
+        AllStates.Add(PlayerState.Jump, new JumpState(PlayerState.Jump, this));
+        AllStates.Add(PlayerState.Fall, new FallState(PlayerState.Fall, this));
+        
 
 
         CurrentState = AllStates[PlayerState.Idle];
@@ -34,6 +37,9 @@ public enum PlayerState
     Idle,
     WalkLeft,
     WalkRight,
+    Jump,
+    Fall,
+    
 
  
 

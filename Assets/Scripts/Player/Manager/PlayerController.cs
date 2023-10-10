@@ -17,11 +17,14 @@ public class PlayerController : MonoBehaviour
 
 
     [Header("Player input and Player locomotion")]
+    [HideInInspector]
     public PlayerInputManager _playerInput;
     public ButtonManager[] buttonManagers;
     [HideInInspector]
     public Rigidbody2D PlayerRigidBody2D;
     public PlayerMovementData data;
+    [HideInInspector]
+    public Vector2 moveDirection;
 
 
     [Header("Player Animation")]
@@ -58,6 +61,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        //Debug.Log(data.CanJump);
         _playerStateManager.CurrentState.OnUpdate();
         GroundCheck();
 
@@ -65,10 +69,6 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         _playerStateManager.CurrentState.OnFixedUpdate();
-
-    }
-    private void LateUpdate()
-    {
 
     }
 
@@ -83,6 +83,12 @@ public class PlayerController : MonoBehaviour
             data.Grounded = true;
         }
         else data.Grounded = false;
+    }
+
+
+    public void CanJump()
+    {
+        data.CanJump = true;
     }
 
 
@@ -104,6 +110,9 @@ public struct PlayerMovementData
     public bool Grounded;
     public float RayCastMaxDistance;
     public LayerMask GroundLayers;
+    public bool CanJump;
+    public bool IsFinished;
+    public float JumpHeight;
     [Header("ScorePoints")]
     public float ScorePoints;
     public float ScorePickUp;

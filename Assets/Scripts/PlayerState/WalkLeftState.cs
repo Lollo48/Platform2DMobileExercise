@@ -21,6 +21,7 @@ public class WalkLeftState : State<PlayerState>
         if (_playerController == null) _playerController = _playerStateManager._playerController;
         _playerController.AnimationController.UpdateAnimatorValues("IsWalking", true);
         _playerController.AnimationController.SpriteRenderer.flipX = false;
+
     }
 
     public override void OnUpdate()
@@ -30,6 +31,11 @@ public class WalkLeftState : State<PlayerState>
         #region CHANGE STATE
         if (!_playerStateManager._playerController._playerInput.LeftButton.isPressed)
             _playerStateManager.ChangeState(PlayerState.Idle);
+        if (_playerController.data.CanJump && _playerController.data.Grounded)
+        {
+            _playerController.moveDirection = _playerController.PlayerRigidBody2D.velocity;
+            _playerStateManager.ChangeState(PlayerState.Jump);
+        }
         #endregion
 
     }
@@ -44,7 +50,7 @@ public class WalkLeftState : State<PlayerState>
     public override void OnExit()
     {
         base.OnExit();
-        _playerController.PlayerRigidBody2D.velocity = Vector2.zero;
+        
     }
 
 

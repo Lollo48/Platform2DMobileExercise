@@ -22,6 +22,7 @@ public class IdleState : State<PlayerState>
         else
         {
             _playerController.AnimationController.UpdateAnimatorValues("IsWalking", false);
+            _playerController.PlayerRigidBody2D.velocity = Vector2.zero;
         }
 
 
@@ -32,11 +33,19 @@ public class IdleState : State<PlayerState>
     {
         base.OnUpdate();
         #region CHANGE STATE
-        if (_playerStateManager._playerController._playerInput.RightButton.isPressed)
+        if (_playerStateManager._playerController._playerInput.RightButton.isPressed && _playerStateManager._playerController.data.Grounded)
             _playerStateManager.ChangeState(PlayerState.WalkRight);
-        if (_playerStateManager._playerController._playerInput.LeftButton.isPressed)
+        if (_playerStateManager._playerController._playerInput.LeftButton.isPressed && _playerStateManager._playerController.data.Grounded)
             _playerStateManager.ChangeState(PlayerState.WalkLeft);
+        if(_playerStateManager._playerController.data.CanJump && _playerStateManager._playerController.data.Grounded)
+        {
+            _playerStateManager._playerController.moveDirection = Vector2.zero;
+            _playerStateManager.ChangeState(PlayerState.Jump);
+        }
         #endregion
+
+
+
 
 
     }
