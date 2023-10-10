@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class PlayerStateManager : StatesMachine<PlayerState>
 {
-    
+    public PlayerController _playerController;
 
-    public PlayerStateManager( Dictionary<PlayerState, State<PlayerState>> listOfSTtes = null, State<PlayerState> currentState = null, State<PlayerState> nextState = null) : base(listOfSTtes, currentState, nextState)
+    public PlayerStateManager(PlayerController playerController, Dictionary<PlayerState, State<PlayerState>> listOfSTtes = null, State<PlayerState> currentState = null, State<PlayerState> nextState = null) : base(listOfSTtes, currentState, nextState)
     {
-        
+        _playerController = playerController;
     }
 
 
@@ -16,7 +16,9 @@ public class PlayerStateManager : StatesMachine<PlayerState>
     protected override void InitStates()
     {
         AllStates.Add(PlayerState.Idle, new IdleState(PlayerState.Idle, this));
-        AllStates.Add(PlayerState.Walk, new WalkState(PlayerState.Idle, this));
+        AllStates.Add(PlayerState.WalkLeft, new WalkLeftState(PlayerState.WalkLeft, this));
+        AllStates.Add(PlayerState.WalkRight, new WalkRightState(PlayerState.WalkRight, this));
+
 
         CurrentState = AllStates[PlayerState.Idle];
         CurrentState.OnEnter();
@@ -30,7 +32,9 @@ public class PlayerStateManager : StatesMachine<PlayerState>
 public enum PlayerState
 {
     Idle,
-    Walk
+    WalkLeft,
+    WalkRight,
+
  
 
 }

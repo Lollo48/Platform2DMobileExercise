@@ -2,19 +2,21 @@ using UnityEngine;
 
 public class AnimationController : MonoBehaviour
 {
-    public Animator Animator;
+
+    Animator _animator;
+    [HideInInspector]
     public SpriteRenderer SpriteRenderer;
 
     private void Awake()
     {
-        Animator = GetComponent<Animator>();
+        _animator = GetComponent<Animator>();
         SpriteRenderer = GetComponent<SpriteRenderer>();
         
     }
 
     public void UpdateAnimatorValues(string AnimationName, bool isWalking)
     {
-        Animator.SetBool(AnimationName, isWalking);
+        _animator.SetBool(AnimationName, isWalking);
 
     }
 

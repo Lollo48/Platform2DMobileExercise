@@ -11,13 +11,13 @@ public class PlayerInputManager
 
     public ButtonManager LeftButton;
     public ButtonManager RightButton;
-    public ButtonManager AttackButton;
+    
 
-    public PlayerInputManager(ButtonManager Left, ButtonManager Right, ButtonManager Attack)
+    public PlayerInputManager(ButtonManager Left, ButtonManager Right)
     {
         LeftButton = Left;
         RightButton = Right;
-        AttackButton = Attack;
+        
     }
 
 }
