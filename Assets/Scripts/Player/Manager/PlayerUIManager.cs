@@ -8,16 +8,20 @@ public class PlayerUIManager
     public TextMeshProUGUI Score;
     PlayerController _playerController;
 
-    public PlayerUIManager(Slider slider, float maxHp, TextMeshProUGUI score,PlayerController playerController)
+    public TextMeshProUGUI Ammo;
+
+    public PlayerUIManager(Slider slider, float maxHp, TextMeshProUGUI score, TextMeshProUGUI ammo, PlayerController playerController)
     {
         Slider = slider;
         Slider.maxValue = maxHp;
         Slider.value = Slider.maxValue;
         Score = score;
+        Ammo = ammo;
         _playerController = playerController;
         ActionManager.OnUpdateScore += UpdateScore;
         ActionManager.OnhealtRecharge += UpdateHP;
         ActionManager.OnHitUpdate += UpdateHitDamage;
+        ActionManager.OnUpdateAmmoCount += UpdateAmmoCount;
     }
 
 
@@ -41,6 +45,11 @@ public class PlayerUIManager
         Slider.value -= damage;
     }
 
-
+    private void UpdateAmmoCount()
+    {
+        if (_playerController.data.Ammo == 0) Ammo.text = 0.ToString();
+         _playerController.data.Ammo -= 1;
+        Ammo.text = _playerController.data.Ammo.ToString();
+    }
 
 }

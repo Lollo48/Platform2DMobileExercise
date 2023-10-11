@@ -34,7 +34,8 @@ public class PlayerController : MonoBehaviour
     [Header("Player UI Manager")]
     public PlayerUIManager PlayerUIManager;
     Slider _slider;
-    public TextMeshProUGUI _scoreText;
+    public TextMeshProUGUI ScoreText;
+    public TextMeshProUGUI Ammo;
 
 
     private void Awake()
@@ -44,12 +45,7 @@ public class PlayerController : MonoBehaviour
         _PlayerStats = new PlayerStats(this);
         _slider = GetComponentInChildren<Slider>();
         //_scoreText = GetComponentInChildren<TextMeshProUGUI>();
-        PlayerUIManager = new PlayerUIManager(_slider,data.MaxHP,_scoreText,this);
-
-    }
-
-    private void OnEnable()
-    {
+        PlayerUIManager = new PlayerUIManager(_slider,data.MaxHP,ScoreText,Ammo,this);
 
     }
 
@@ -57,6 +53,8 @@ public class PlayerController : MonoBehaviour
     {
         PlayerRigidBody2D = GetComponent<Rigidbody2D>();
         AnimationController = GetComponentInChildren<AnimationController>();
+        data.Ammo = data.InitialAmmo;
+        Ammo.text = data.InitialAmmo.ToString();
     }
 
     private void Update()
@@ -116,4 +114,8 @@ public struct PlayerMovementData
     [Header("ScorePoints")]
     public float ScorePoints;
     public float ScorePickUp;
+    [Header("Weapon")]
+    public int InitialAmmo;
+    public int Ammo;
+
 }
