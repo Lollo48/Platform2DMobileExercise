@@ -13,9 +13,6 @@ public class PlayerController : MonoBehaviour
     [Header("Player Stats")]
     PlayerStats _PlayerStats;
     
-    
-
-
     [Header("Player input and Player locomotion")]
     [HideInInspector]
     public PlayerInputManager _playerInput;

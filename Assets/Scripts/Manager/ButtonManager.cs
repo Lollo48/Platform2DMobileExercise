@@ -1,12 +1,13 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
-
+using UnityEngine.UI;
 
 public class ButtonManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
 
     public bool isPressed;
 
+    Button[] myButton;
 
     public void OnPointerDown(PointerEventData eventData)
     {
@@ -21,3 +22,4 @@ public class ButtonManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
 
 }
+

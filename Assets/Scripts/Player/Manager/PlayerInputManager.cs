@@ -21,3 +21,10 @@ public class PlayerInputManager
     }
 
 }
+
+
+public enum Direction
+{
+    Left,
+    Right
+}

@@ -1,6 +1,6 @@
 using System;
 
-public class ActionManager 
+public static class ActionManager 
 {
     public static Action<float> OnhealtRecharge;
 
